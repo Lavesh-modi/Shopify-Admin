@@ -1,0 +1,29 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "a7f0d09b5ba4ff1928c8f412f54dc14e"
+name = "admin"
+handle = "admin-58"
+application_url = "https://shapes-tile-kazakhstan-card.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "quickstart-eddeaa0d.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products,read_products,read_inventory,write_discounts"
+
+[auth]
+redirect_urls = [
+  "https://shapes-tile-kazakhstan-card.trycloudflare.com/auth/callback",
+  "https://shapes-tile-kazakhstan-card.trycloudflare.com/auth/shopify/callback",
+  "https://shapes-tile-kazakhstan-card.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-04"
+
+[pos]
+embedded = false
