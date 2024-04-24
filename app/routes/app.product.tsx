@@ -49,9 +49,9 @@ export const loader: LoaderFunction = async ({ request }) => {
     if (response.ok) {
       const data = await response.json();
 
-      //       const abc = data;
+            const abc = data;
       // console.log(abc,'abc.s.d.sa.d..asd')
-      // console.log(abc.products,"sdhgvfhsnd")
+      console.log(abc.products,"sdhgvfhsnd")
       // console.log(data.products,"data")
       const {
         data: {

@@ -20,7 +20,7 @@ export const loader: LoaderFunction = async ({ request }) => {
       session: session,
       location_ids: "67743776828",
     });
-
+debugger
     if (response) {
       const data = response.data;
       return json({
