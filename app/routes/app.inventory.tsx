@@ -6,11 +6,9 @@ import {
   Page,
   ResourceList,
   LegacyCard,
-  // Thumbnail,
   Text,
   List,
   Card,
-  // DataTable,
 } from "@shopify/polaris";
 import { authenticate } from "~/shopify.server";
 
@@ -24,16 +22,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     });
 
     if (response) {
-      console.log('hit')
-      // console.log(response,"response of the inventory")
-
       const data = response.data;
-      debugger;
-
-      // console.log(data, 'data from the response ')
-
-      // console.log(JSON.stringify(data[0]), 'inventory')
-
       return json({
         inventory: data,
       });
@@ -47,55 +36,63 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 const Inventory = () => {
   const data: any = useLoaderData();
-  console.log(data.inventory, 'data');
-  // const row = data.inventory
- 
 
   return (
     <div>
       <Page fullWidth>
         <Layout>
-          <Layout.Section variant="oneThird">
-            <LegacyCard title="Florida" actions={[{ content: "Manage" }]}>
+          <Layout.Section variant="oneHalf">
+            <Card>
+              <h1>Inventory</h1>
+              <Card>
+                <List type="bullet" gap="loose">
+                  {data.inventory.map((data: any) => {
+                    return (
+                      <List.Item key={data.inventory_item_id}>
+                        <h1>Id:-{data.inventory_item_id}</h1>
+                        <h2>Location:-{data.location_id}</h2>
+                      </List.Item>
+                    );
+                  })}
+                </List>
+              </Card>
+              |
+              <Card>
+                <List type="bullet" gap="loose">
+                  {data.inventory.map((data: any) => {
+                    return (
+                      <List.Item key={data.inventory_item_id}>
+                        <h1>Id:-{data.inventory_item_id}</h1>
+                        <h2>Location:-{data.location_id}</h2>
+                      </List.Item>
+                    );
+                  })}
+                </List>
+              </Card>
+            </Card>
+          </Layout.Section>
+          <Layout.Section variant="oneHalf">
+            <LegacyCard title="Inventory" actions={[{ content: "Manage" }]}>
               <LegacyCard.Section>
                 <Text tone="subdued" as="span">
-                  455 units available
+                  26 units available
                 </Text>
               </LegacyCard.Section>
-              <LegacyCard.Section title="Items">
+              <LegacyCard.Section title="Products">
                 <ResourceList
                   resourceName={{ singular: "product", plural: "products" }}
-                  // items={[
-                  //   {
-                  //     id: "341",
-                  //     url: "#",
-                  //     name: "Black & orange scarf",
-                  //     sku: "9234194023",
-                  //     quantity: "254",
-                  //     media: (
-                  //       <Thumbnail
-                  //         source="https://burst.shopifycdn.com/photos/black-orange-stripes_373x@2x.jpg"
-                  //         alt="Black orange scarf"
-                  //       />
-                  //     ),
-                  //   },
-                  //   {
-                  //     id: "256",
-                  //     url: "#",
-                  //     name: "Tucan scarf",
-                  //     sku: "9234194010",
-                  //     quantity: "201",
-                  //     media: (
-                  //       <Thumbnail
-                  //         source="https://burst.shopifycdn.com/photos/tucan-scarf_373x@2x.jpg"
-                  //         alt="Tucan scarf"
-                  //       />
-                  //     ),
-                  //   },
-                  // ]}
                   items={data.inventory}
                   renderItem={(item) => {
-                    const { id, url, name, sku, media,  } = item;
+                    const {
+                      id,
+                      url,
+                      name,
+                      media,
+                      available,
+                      admin_graphql_api_id,
+                      location_id,
+                      inventory_item_id,
+                    } = item;
 
                     return (
                       <ResourceList.Item
@@ -104,62 +101,24 @@ const Inventory = () => {
                         media={media}
                         accessibilityLabel={`View details for ${name}`}
                       >
-                        <Text variant="bodyMd" fontWeight="bold" as="h3">
+                        <Text variant="bodyMd" fontWeight="bold" as="h2">
                           {name}
                         </Text>
-                        <div>SKU: {sku}</div>
-                        <div>{id} available</div>
+                        <div>InventoryId:{inventory_item_id}</div>
+                        <div>ID:-{admin_graphql_api_id}</div>
+                        <div>SKU: {available}</div>
+
+                        {/* <div>{id} available</div> */}
+                        <div>Location:{location_id}</div>
                       </ResourceList.Item>
                     );
                   }}
                 />
               </LegacyCard.Section>
             </LegacyCard>
-
-
-            <Card>
-                <List type="bullet" gap="loose">
-                    {
-                        data.inventory.map((data: any) => {
-                            // const {node: collection } = edge;
-                            return (
-                                <List.Item key={data.inventory_item_id}>
-                              <h1 >Id:-{data.inventory_item_id}</h1>
-                              <h2>Location:-{data.location_id
-}</h2>
-                                    {/* <h2>{collection.title}</h2> */}
-                                    {/* <h2>{collection.handle}</h2> */}
-                                    {/* <h2>{collection.description}</h2> */}
-                                </List.Item>
-                            )
-                        })
-                    }
-
-                </List>
-                {/* <h2>defjvhewrf</h2> */}
-            </Card>
           </Layout.Section>
-
-          {/* <DataTable
-      columnContentTypes={[
-        "text", // location_id
-        "text", // Price (replace with actual logic)
-        "text", // available
-        // "text", // Net quantity (uncomment if needed)
-        // "text", // Net sales (uncomment if needed)
-      ]}
-      headings={[
-        "location_id",
-        "Price",
-        "available",
-        // "Net quantity", (uncomment if needed)
-        // "Net sales", (uncomment if needed)
-      ]}
-      rows={firstFiveItems}
-    /> */}
         </Layout>
       </Page>
-
     </div>
   );
 };
