@@ -31,6 +31,8 @@ export default function App() {
         <Link to="/app/discount">Discount page</Link>
         <Link to="/app/gift">GiftCard page</Link>
         <Link to="/app/customer">Customer page</Link>
+        <Link to="/app/dashboard">Dashboard page</Link>
+
       </ui-nav-menu>
       <Outlet />
     </AppProvider>

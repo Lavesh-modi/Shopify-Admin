@@ -1,0 +1,11 @@
+.Polaris-LegacyCard , Polaris-LegacyCard > * {
+    height: 100%;
+}
+
+.Polaris-MediaCard__MediaContainer {
+    height: 100%;
+}
+
+.Polaris-MediaCard__MediaContainer .Polaris-VideoThumbnail__ThumbnailContainer .Polaris-VideoThumbnail__Thumbnail[style$="height=140)"] {
+    padding: 0;  
+}
