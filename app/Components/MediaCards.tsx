@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { MediaCard, VideoThumbnail, Layout, Button } from "@shopify/polaris";
+import { MediaCard, VideoThumbnail, Layout } from "@shopify/polaris";
 import PaginationExample from "./PaginationButton";
 
 function MediaCardExample() {
@@ -13,26 +13,27 @@ function MediaCardExample() {
   }));
 
   // State to manage which cards are currently visible
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [visibleCards, setVisibleCards] = useState(4);
   const scrollRef = useRef(null);
 
   // Function to handle "Next" button click
-  const handleNextClick = () => {
-    setVisibleCards((prevVisibleCards) =>
-      Math.min(prevVisibleCards + 4, demoData.length),
-    );
-    if (scrollRef.current) {
-      scrollRef.current.scrollLeft += 500; // Adjust the scroll amount as per your requirement
-    }
-  };
+  // const handleNextClick = () => {
+  //   setVisibleCards((prevVisibleCards) =>
+  //     Math.min(prevVisibleCards + 4, demoData.length),
+  //   );
+  //   if (scrollRef.current) {
+  //     scrollRef.current.scrollLeft += 500; // Adjust the scroll amount as per your requirement
+  //   }
+  // };
 
-  // Function to handle "Previous" button click
-  const handlePreviousClick = () => {
-    setVisibleCards((prevVisibleCards) => Math.max(prevVisibleCards - 4, 4));
-    if (scrollRef.current) {
-      scrollRef.current.scrollLeft -= 500; // Adjust the scroll amount as per your requirement
-    }
-  };
+  // // Function to handle "Previous" button click
+  // const handlePreviousClick = () => {
+  //   setVisibleCards((prevVisibleCards) => Math.max(prevVisibleCards - 4, 4));
+  //   if (scrollRef.current) {
+  //     scrollRef.current.scrollLeft -= 500; // Adjust the scroll amount as per your requirement
+  //   }
+  // };
 
   return (
     <div>
